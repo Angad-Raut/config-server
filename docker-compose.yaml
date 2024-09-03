@@ -1,0 +1,10 @@
+version: '1.0'
+services:
+  config-server-app:
+    container_name: configServerContainer
+    image: config-server
+    restart: always
+    build: .
+    ports:
+      - 8888:8888
+
