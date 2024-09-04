@@ -9,20 +9,20 @@ eureka:
 
 spring:
   jpa:
-    database: MYSQL
+    database: POSTGRESQL
     show-sql: true
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
         jdbc.lob.non_contextual_creation: true
-        dialect: org.hibernate.dialect.MySQL8Dialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
   datasource:
-    platform: mysql
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/${MYSQL_DATABASE:expensesDB}?createDatabaseIfNotExist=true&characterEncoding=UTF-8&useUnicode=true&useSSL=false&allowPublicKeyRetrieval=true
-    username: ${MYSQL_USER:root}
-    password: ${MYSQL_PASSWORD:angad@db}
-    driverClassName: com.mysql.cj.jdbc.Driver
+    platform: postgres
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DATABASE:expensesDB}
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:angad@db}
+    driverClassName: org.postgresql.Driver
 
 management:
   tracing:
