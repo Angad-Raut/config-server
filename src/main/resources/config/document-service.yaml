@@ -10,13 +10,13 @@ eureka:
 spring:
   data:
     mongodb:
-      uri: ${MONGODB_URI:mongodb://localhost:27017}
+      uri: mongodb://localhost:27017
       authentication-database: admin
-      host: ${MONGODB_HOST:localhost}
-      port: ${MONGODB_PORT:27017}
-      database: ${MONGODB_DATABASE:documentsDb}
-      username: ${MONGODB_USER:angad}
-      password: ${MONGODB_PASSWORD:angad@db}
+      host: localhost
+      port: 27017
+      database: documentsDb
+      username: angad
+      password: angad@db
       auto-index-creation: true
       write-concern: NORMAL
 

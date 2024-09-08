@@ -19,9 +19,9 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   datasource:
     platform: postgres
-    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DATABASE:expensesDB}
-    username: ${POSTGRES_USER:postgres}
-    password: ${POSTGRES_PASSWORD:angad@db}
+    url: jdbc:postgresql://localhost:5432/expensesDB
+    username: postgres
+    password: angad@db
     driverClassName: org.postgresql.Driver
 
 management:
