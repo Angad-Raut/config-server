@@ -1,9 +1,4 @@
 pipeline {
-    environment {
-       registry = "9766945760/config-server"
-       registryCredential = 'dockerhub-credentials'
-       dockerImage = ''
-    }
     agent any
     tools {
         jdk 'Jdk17'
@@ -32,31 +27,28 @@ pipeline {
                 bat 'mvn clean package'
             }
         }
-        stage('Docker Build') {
-            steps{
-                script {
-                    dockerImage = docker.build registry
-                    echo 'Build Image Completed'
-                }
-            }
-        }
-        stage('Docker Push') {
+        stage('Archive Artifacts'){
             steps {
-                script {
-                    docker.withRegistry( '', registryCredential ) {
-                       dockerImage.push('latest')
-                       echo 'Push Image Completed'
-                    }
-                }
+               archiveArtifacts artifacts: 'target/*.war'
             }
         }
-        stage('Deployment') {
-             steps {
-                  bat 'docker-compose up --build -d'
-                  echo 'SUCCESS'
-                  bat 'docker logout'
-                  bat 'docker rmi 9766945760/config-server:latest'
-             }
+        stage('Deploy on Tomcat') {
+            steps {
+                deploy adapters: [tomcat9(url: 'http://localhost:8085/',
+                    credentialsId: 'tomcat-credentials')],
+                    war: 'target/*.war',
+                    contextPath: 'config-server'
+            }
+        }
+        stage('Notification'){
+            steps {
+                emailext(
+                    subject: 'Config Server Microservice Deployed',
+                    body: 'Config server microservice successfully deployed on tomcat server',
+                    to: 'angadraut89@gmail.com'
+                )
+                echo 'SUCCESS'
+            }
         }
     }
 }
