@@ -10,15 +10,7 @@ eureka:
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017
-      authentication-database: admin
-      host: localhost
-      port: 27017
-      database: documentsDb
-      username: angad
-      password: angad@db
-      auto-index-creation: true
-      write-concern: NORMAL
+      uri: mongodb://localhost:27017/documentsDb
 
 management:
   tracing:
