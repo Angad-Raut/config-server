@@ -34,20 +34,10 @@ pipeline {
         }
         stage('Deploy on Tomcat') {
             steps {
-                deploy adapters: [tomcat9(url: 'http://localhost:8085/',
+                deploy adapters: [tomcat9(url: 'http://localhost:8086/',
                     credentialsId: 'tomcat-credentials')],
                     war: 'target/*.war',
                     contextPath: 'config-server'
-            }
-        }
-        stage('Notification'){
-            steps {
-                emailext(
-                    subject: 'Config Server Microservice Deployed',
-                    body: 'Config server microservice successfully deployed on tomcat server',
-                    to: 'angadraut89@gmail.com'
-                )
-                echo 'SUCCESS'
             }
         }
     }
