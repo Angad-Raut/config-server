@@ -6,3 +6,11 @@ spring:
     active: native
   application:
     name: config-server
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${random.value}
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8086/eureka-server/eureka/
